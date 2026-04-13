@@ -1,0 +1,37 @@
+# k8s-manifests/argocd/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app-production
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io   # cascade delete protection
+spec:
+  project: production
+
+  source:
+    repoURL: https://github.com/your-org/k8s-manifests
+    targetRevision: main
+    path: overlays/production            # kustomize overlay path
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-app-production
+
+  syncPolicy:
+    automated:
+      prune: true          # remove resources deleted from Git
+      selfHeal: true       # auto-revert out-of-band cluster changes
+      allowEmpty: false    # never sync an empty app
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - ApplyOutOfSyncOnly=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 3m
+
+  revisionHistoryLimit: 10   # rollback window
