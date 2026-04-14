@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-svc
+  labels:
+    app: chat-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: chat-svc
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP

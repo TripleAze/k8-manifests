@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-svc
+  labels:
+    app: chat-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat-svc
+  template:
+    metadata:
+      labels:
+        app: chat-svc
+    spec:
+      containers:
+        - name: chat-svc
+          image: chat-svc
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: rds-credentials
+                  key: host
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rds-credentials
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rds-credentials
+                  key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: rds-credentials
+                  key: dbname
+            - name: DB_PORT
+              value: "3306"
+            - name: SQLALCHEMY_DATABASE_URI
+              value: "mysql+mysqlconnector://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5

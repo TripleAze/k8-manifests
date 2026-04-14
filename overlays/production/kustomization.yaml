@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: production
+
+resources:
+  - ../../base
+
+patches:
+  - path: ingress-patch.yaml
+  - patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 3
+    target:
+      kind: Deployment
+      name: chat-front
+  - patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 3
+    target:
+      kind: Deployment
+      name: chat-svc
+
+images:
+  - name: chat-front
+    newTag: latest
+  - name: chat-svc
+    newTag: latest
