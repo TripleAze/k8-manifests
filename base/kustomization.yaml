@@ -8,3 +8,5 @@ resources:
   - chat-svc-service.yaml
   - ingress.yaml
   - external-secret.yaml
+  - secret-store.yaml
+  - front-config.yaml

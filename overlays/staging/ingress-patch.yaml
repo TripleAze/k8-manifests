@@ -2,33 +2,37 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: chat-ingress
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-1:454448876799:certificate/63d56b54-c580-4ef7-8265-2d3e223b66c5"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
 spec:
+  ingressClassName: alb
   rules:
-    - host: chat-staging.example.com
+    - host: staging.abu-eks.cloud-ip.cc
       http:
         paths:
-          - path: /()(.*)
-            pathType: ImplementationSpecific
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: chat-front
                 port:
                   number: 80
-          - path: /api(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /api
+            pathType: Prefix
             backend:
               service:
                 name: chat-svc
                 port:
                   number: 8080
-          - path: /ws(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /ws
+            pathType: Prefix
             backend:
               service:
                 name: chat-svc
                 port:
                   number: 8080
-  tls:
-    - hosts:
-        - chat-staging.example.com
-      secretName: chat-staging-tls
+

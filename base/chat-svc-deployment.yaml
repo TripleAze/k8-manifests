@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: chat-svc
-          image: chat-svc
+          image: 454448876799.dkr.ecr.us-east-1.amazonaws.com/solo-devops:chat-svc
           ports:
             - containerPort: 8080
           env:
