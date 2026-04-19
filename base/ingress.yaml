@@ -5,13 +5,12 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-1:454448876799:certificate/63d56b54-c580-4ef7-8265-2d3e223b66c5"
-    # Additional ALB features like SSL redirection can be added here
+    # alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-1:454448876799:certificate/63d56b54-c580-4ef7-8265-2d3e223b66c5"
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
     alb.ingress.kubernetes.io/ssl-redirect: '443'
     alb.ingress.kubernetes.io/target-group-attributes: stickiness.enabled=true,stickiness.lb_cookie.duration_seconds=3600
 spec:
-  ingressClassName: alb
+  ingressClassName: eks-auto-mode
   rules:
     - host: "*.abu-eks.cloud-ip.cc"
       http:
