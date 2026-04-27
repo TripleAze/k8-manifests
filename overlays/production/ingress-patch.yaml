@@ -12,7 +12,7 @@ metadata:
 spec:
   ingressClassName: eks-auto-mode
   rules:
-    - host: "*.abu-eks.cloud-ip.cc"
+    - host: "*.atiqabubakar.sbs"
       http:
         paths:
           - path: /

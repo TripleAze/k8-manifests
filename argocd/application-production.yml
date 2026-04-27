@@ -7,16 +7,16 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io   # cascade delete protection
 spec:
-  project: production
+  project: default
 
   source:
-    repoURL: https://github.com/your-org/k8s-manifests
-    targetRevision: main
+    repoURL: git@github.com:TripleAze/k8-manifests.git
+    targetRevision: master
     path: overlays/production            # kustomize overlay path
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: my-app-production
+    namespace: production
 
   syncPolicy:
     automated:

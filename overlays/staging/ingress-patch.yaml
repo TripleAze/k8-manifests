@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: eks-auto-mode
   rules:
-    - host: staging.abu-eks.cloud-ip.cc
+    - host: staging.atiqabubakar.sbs
       http:
         paths:
           - path: /
