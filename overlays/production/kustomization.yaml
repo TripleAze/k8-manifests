@@ -11,6 +11,24 @@ patches:
 - path: ingress-patch.yaml
 - patch: |-
     - op: replace
+      path: /data/config-docker.yml
+      value: |
+        pyms:
+          services:
+            requests:
+              data: ""
+          config:
+            DEBUG: true
+            TESTING: true
+            APP_NAME: project
+            APPLICATION_ROOT : /
+            SECRET_KEY: "gjr39dkjn344_!67#"
+            service_host: https://chat.atiqabubakar.sbs
+  target:
+    kind: ConfigMap
+    name: chat-front-config
+- patch: |-
+    - op: replace
       path: /spec/replicas
       value: 3
   target:
