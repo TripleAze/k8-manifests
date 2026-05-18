@@ -4,14 +4,16 @@ kind: Kustomization
 namespace: staging
 
 resources:
-  - ../../base
-  - namespace.yaml
+- ../../base
+- namespace.yaml
 
 patches:
-  - path: ingress-patch.yaml
+- path: ingress-patch.yaml
 
 images:
-  - name: chat-front
-    newTag: staging
-  - name: chat-svc
-    newTag: staging
+- name: chat-front
+  newName: 454448876799.dkr.ecr.us-east-1.amazonaws.com/chat-front
+  newTag: 81676e0d25ea86e57fbd5a6bec501f600526f56c
+- name: chat-svc
+  newName: 454448876799.dkr.ecr.us-east-1.amazonaws.com/chat-svc
+  newTag: 81676e0d25ea86e57fbd5a6bec501f600526f56c
