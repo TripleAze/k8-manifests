@@ -1,0 +1,33 @@
+# Custom values for kube-prometheus-stack
+prometheus:
+  prometheusSpec:
+    retention: 2d
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: ebs-sc
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 2Gi
+
+grafana:
+  adminPassword: "2ce7d9bd29155070c445948c59d91c5d"
+  persistence:
+    enabled: true
+    storageClassName: ebs-sc
+    accessModes: ["ReadWriteOnce"]
+    size: 2Gi
+  ingress:
+    enabled: true
+    ingressClassName: alb
+    annotations:
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/target-type: ip
+      alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-1:454448876799:certificate/80fd57fa-226d-4056-b058-71182b4fc7e6"
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+      alb.ingress.kubernetes.io/ssl-redirect: '443'
+    hosts:
+      - grafana.atiqabubakar.sbs
+    path: /
+    pathType: Prefix

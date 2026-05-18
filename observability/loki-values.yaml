@@ -1,0 +1,26 @@
+# Custom values for loki-stack
+loki:
+  enabled: true
+  persistence:
+    enabled: true
+    storageClassName: ebs-sc
+    accessModes: ["ReadWriteOnce"]
+    size: 2Gi
+  config:
+    limits_config:
+      retention_period: 48h
+    table_manager:
+      retention_deletes_enabled: true
+      retention_period: 48h
+    memberlist:
+      advertise_addr: "127.0.0.1"
+      bind_addr:
+        - "127.0.0.1"
+      join_members:
+        - "127.0.0.1"
+
+promtail:
+  enabled: true
+  config:
+    clients:
+      - url: http://{{ .Release.Name }}-loki:3100/loki/api/v1/push
