@@ -35,4 +35,11 @@ spec:
                 name: chat-svc
                 port:
                   number: 8080
+          - path: /socket.io
+            pathType: Prefix
+            backend:
+              service:
+                name: chat-svc
+                port:
+                  number: 8080
 
