@@ -4,30 +4,30 @@ kind: Kustomization
 namespace: production
 
 resources:
-  - ../../base
-  - namespace.yaml
+- ../../base
+- namespace.yaml
 
 patches:
-  - path: ingress-patch.yaml
-  - patch: |-
-      - op: replace
-        path: /spec/replicas
-        value: 3
-    target:
-      kind: Deployment
-      name: chat-front
-  - patch: |-
-      - op: replace
-        path: /spec/replicas
-        value: 3
-    target:
-      kind: Deployment
-      name: chat-svc
+- path: ingress-patch.yaml
+- patch: |-
+    - op: replace
+      path: /spec/replicas
+      value: 3
+  target:
+    kind: Deployment
+    name: chat-front
+- patch: |-
+    - op: replace
+      path: /spec/replicas
+      value: 3
+  target:
+    kind: Deployment
+    name: chat-svc
 
 images:
-  - name: chat-front
-    newName: 454448876799.dkr.ecr.us-east-1.amazonaws.com/chat-front
-    newTag: latest
-  - name: chat-svc
-    newName: 454448876799.dkr.ecr.us-east-1.amazonaws.com/chat-svc
-    newTag: latest
+- name: chat-front
+  newName: 454448876799.dkr.ecr.us-east-1.amazonaws.com/chat-front
+  newTag: dbb06ab30ffb0bb88d146f6676cb2033f42f9e07
+- name: chat-svc
+  newName: 454448876799.dkr.ecr.us-east-1.amazonaws.com/chat-svc
+  newTag: dbb06ab30ffb0bb88d146f6676cb2033f42f9e07
