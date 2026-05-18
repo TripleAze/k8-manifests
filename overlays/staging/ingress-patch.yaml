@@ -9,7 +9,7 @@ metadata:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
     alb.ingress.kubernetes.io/ssl-redirect: '443'
 spec:
-  ingressClassName: eks-auto-mode
+  ingressClassName: alb
   rules:
     - host: staging.atiqabubakar.sbs
       http:

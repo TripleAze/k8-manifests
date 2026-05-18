@@ -1,0 +1,4 @@
+# Exclude local secrets from version control
+argocd/k8-manifests-repo-secret.yml
+*.key
+*.pem
