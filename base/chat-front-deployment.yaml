@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: chat-front
-          image: 454448876799.dkr.ecr.us-east-1.amazonaws.com/solo-devops:chat-front
+          image: chat-front
           volumeMounts:
             - name: config-volume
               mountPath: /microservice/config-docker.yml
