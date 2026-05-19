@@ -31,7 +31,7 @@ patches:
 images:
 - name: chat-front
   newName: 454448876799.dkr.ecr.us-east-1.amazonaws.com/chat-front
-  newTag: 934578b396c0732cd70050254c9fe68e6ad6a882
+  newTag: cd554df749d504aa50f0ab7b28dd1d09463dc598
 - name: chat-svc
   newName: 454448876799.dkr.ecr.us-east-1.amazonaws.com/chat-svc
-  newTag: 934578b396c0732cd70050254c9fe68e6ad6a882
+  newTag: cd554df749d504aa50f0ab7b28dd1d09463dc598
