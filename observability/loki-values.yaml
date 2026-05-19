@@ -1,6 +1,7 @@
 # Custom values for loki-stack
 loki:
   enabled: true
+  isDefault: false
   image:
     tag: "2.9.10"
   persistence:

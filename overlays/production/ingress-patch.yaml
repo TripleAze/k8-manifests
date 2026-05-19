@@ -12,6 +12,37 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
+    - host: "atiqabubakar.sbs"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: chat-front
+                port:
+                  number: 80
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: chat-svc
+                port:
+                  number: 8080
+          - path: /ws
+            pathType: Prefix
+            backend:
+              service:
+                name: chat-svc
+                port:
+                  number: 8080
+          - path: /socket.io
+            pathType: Prefix
+            backend:
+              service:
+                name: chat-svc
+                port:
+                  number: 8080
     - host: "*.atiqabubakar.sbs"
       http:
         paths:
